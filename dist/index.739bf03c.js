@@ -1215,9 +1215,9 @@ class Slideshow {
         }, 0);
     }
     /**
-	 * Navigation
-	 * @param {String} direction 'prev' || 'next'
-	 */ navigate(direction) {
+ * Navigation
+ * @param {String} direction 'prev' || 'next'
+ */ navigate(direction) {
         if (this.isAnimating || direction === "next" && this.current === this.totalItems - 1 || direction === "prev" && this.current === 0) return;
         this.isAnimating = true;
         const previousCurrent = this.current;
@@ -1236,7 +1236,7 @@ class Slideshow {
         (0, _gsap.gsap).timeline().to(this.DOM.el, {
             duration: 1,
             ease: "expo",
-            y: direction === "next" ? `-=${winsize.height / 2 + winsize.height * .02}` : `+=${winsize.height / 2 + winsize.height * .02}`,
+            y: direction === "next" ? `-=${winsize.height * 0.7 + winsize.height * 0.02}` : `+=${winsize.height * 0.7 + winsize.height * 0.02}`,
             onComplete: ()=>{
                 this.isAnimating = false;
             }

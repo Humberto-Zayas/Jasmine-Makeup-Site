@@ -7,9 +7,9 @@ gsap.registerPlugin(Observer);
 
 const body = document.body;
 
-let winsize = {width: window.innerWidth, height: window.innerHeight};
+let winsize = { width: window.innerWidth, height: window.innerHeight };
 window.addEventListener('resize', () => {
-	winsize = {width: window.innerWidth, height: window.innerHeight};
+	winsize = { width: window.innerWidth, height: window.innerHeight };
 });
 
 /**
@@ -27,12 +27,12 @@ export class Slideshow {
 		stackWrap: document.querySelector('.stack-wrap'),
 		// the DOM location of the .stacks element when the slideshow is open
 		slides: document.querySelector('.slides'),
-		
+
 		// .content element
 		content: document.querySelector('.content'),
 		// the content items (.content__item)
 		contentItems: [...document.querySelectorAll('.content__item')],
-		
+
 		// the main title ("Photography")
 		mainTitleTexts: [...document.querySelectorAll('.title > .oh > .oh__inner')],
 
@@ -63,7 +63,7 @@ export class Slideshow {
 	 */
 	constructor(DOM_el) {
 		this.DOM.el = DOM_el;
-		
+
 		this.DOM.items = [...this.DOM.el.querySelectorAll('.stack__item:not(.stack__item--empty)')];
 		this.totalItems = this.DOM.items.length;
 		this.DOM.contentItems.forEach(item => this.contentItems.push(new ContentItem(item)));
@@ -74,7 +74,7 @@ export class Slideshow {
 	 * Event binding.
 	 */
 	initEvents() {
-		
+
 		this.DOM.items.forEach((item, position) => {
 			// Clicking on a stack item reveals the slideshow navigation and the item's content
 			item.addEventListener('click', () => {
@@ -96,7 +96,7 @@ export class Slideshow {
 
 		// Trigger the close() on scroll by using the gsap observer plugin
 		const scrollFn = () => {
-			if ( this.isOpen && !this.isAnimating ) {
+			if (this.isOpen && !this.isAnimating) {
 				this.close();
 				this.scrollObserver.disable();
 			}
@@ -118,11 +118,11 @@ export class Slideshow {
 	 */
 	open(stackItem) {
 
-		if ( this.isAnimating || this.isOpen ) {
+		if (this.isAnimating || this.isOpen) {
 			return;
 		}
 		this.isAnimating = true;
-		
+
 		// Update the current value
 		this.current = this.DOM.items.indexOf(stackItem);
 
@@ -130,26 +130,26 @@ export class Slideshow {
 		this.scrollObserver.enable();
 
 		const scrollY = window.scrollY;
-		
+
 		body.classList.add('oh');
 		this.DOM.content.classList.add('content--open');
-		
+
 		// set CSS current classes to both content and stack item elements
 		this.contentItems[this.current].DOM.el.classList.add('content__item--current');
 		this.DOM.items[this.current].classList.add('stack__item--current');
 
-		const state = Flip.getState(this.DOM.items, {props: 'opacity'});
+		const state = Flip.getState(this.DOM.items, { props: 'opacity' });
 		this.DOM.slides.appendChild(this.DOM.el);
 
-		const itemCenter = stackItem.offsetTop + stackItem.offsetHeight/2;
-		
+		const itemCenter = stackItem.offsetTop + stackItem.offsetHeight / 2;
+
 		// seems to solve a bug in firefox
 		document.documentElement.scrollTop = document.body.scrollTop = 0;
 
 		gsap.set(this.DOM.el, {
-			y: winsize.height/2 - itemCenter + scrollY
-		});		
-		
+			y: winsize.height / 2 - itemCenter + scrollY
+		});
+
 		// seems to solve a bug in firefox
 		document.documentElement.scrollTop = document.body.scrollTop = 0;
 
@@ -165,33 +165,33 @@ export class Slideshow {
 			onStart: () => document.documentElement.scrollTop = document.body.scrollTop = scrollY,
 			absoluteOnLeave: true,
 		})
-		.to(this.DOM.mainTitleTexts, {
-			duration: .9,
-			ease: 'expo',
-			yPercent: -101
-		}, 0)
-		.to(this.contentItems[this.current].DOM.texts, {
-			duration: 1,
-			ease: 'expo',
-			startAt: {yPercent: 101},
-			yPercent: 0
-		}, 0)
-		.to(this.DOM.backCtrl, {
-			duration: 1,
-			ease: 'expo',
-			startAt: {opacity: 0},
-			opacity: 1
-		}, 0)
-		.to([this.DOM.navArrows.prev, this.DOM.navArrows.next], {
-			duration: 1,
-			ease: 'expo',
-			startAt: {
-				opacity: 0,
-				y: pos => pos ? -150 : 150
-			},
-			y: 0,
-			opacity: pos => this.current === 0 && !pos || this.current === this.totalItems-1 && pos ? 0 : 1
-		}, 0);
+			.to(this.DOM.mainTitleTexts, {
+				duration: .9,
+				ease: 'expo',
+				yPercent: -101
+			}, 0)
+			.to(this.contentItems[this.current].DOM.texts, {
+				duration: 1,
+				ease: 'expo',
+				startAt: { yPercent: 101 },
+				yPercent: 0
+			}, 0)
+			.to(this.DOM.backCtrl, {
+				duration: 1,
+				ease: 'expo',
+				startAt: { opacity: 0 },
+				opacity: 1
+			}, 0)
+			.to([this.DOM.navArrows.prev, this.DOM.navArrows.next], {
+				duration: 1,
+				ease: 'expo',
+				startAt: {
+					opacity: 0,
+					y: pos => pos ? -150 : 150
+				},
+				y: 0,
+				opacity: pos => this.current === 0 && !pos || this.current === this.totalItems - 1 && pos ? 0 : 1
+			}, 0);
 
 	}
 	/**
@@ -199,7 +199,7 @@ export class Slideshow {
 	 */
 	close() {
 
-		if ( this.isAnimating || !this.isOpen ) {
+		if (this.isAnimating || !this.isOpen) {
 			return;
 		}
 		this.isAnimating = true;
@@ -209,8 +209,8 @@ export class Slideshow {
 		this.DOM.items[this.current].classList.remove('stack__item--current');
 
 		body.classList.remove('oh');
-		
-		const state = Flip.getState(this.DOM.items, {props: 'opacity'});
+
+		const state = Flip.getState(this.DOM.items, { props: 'opacity' });
 		this.DOM.stackWrap.appendChild(this.DOM.el);
 
 		gsap.set(this.DOM.el, {
@@ -231,71 +231,71 @@ export class Slideshow {
 			},
 			absoluteOnLeave: true
 		})
-		.to(this.DOM.mainTitleTexts, {
-			duration: .9,
-			ease: 'expo',
-			startAt: {yPercent: 101},
-			yPercent: 0
-		}, 0)
-		.to(this.contentItems[this.current].DOM.texts, {
-			duration: 1,
-			ease: 'expo',
-			yPercent: -101
-		}, 0)
-		.to(this.DOM.backCtrl, {
-			duration: 1,
-			ease: 'expo',
-			opacity: 0
-		}, 0)
-		.to([this.DOM.navArrows.prev, this.DOM.navArrows.next], {
-			duration: 1,
-			ease: 'expo',
-			y: pos => pos ? 100 : -100,
-			opacity: 0
-		}, 0);
+			.to(this.DOM.mainTitleTexts, {
+				duration: .9,
+				ease: 'expo',
+				startAt: { yPercent: 101 },
+				yPercent: 0
+			}, 0)
+			.to(this.contentItems[this.current].DOM.texts, {
+				duration: 1,
+				ease: 'expo',
+				yPercent: -101
+			}, 0)
+			.to(this.DOM.backCtrl, {
+				duration: 1,
+				ease: 'expo',
+				opacity: 0
+			}, 0)
+			.to([this.DOM.navArrows.prev, this.DOM.navArrows.next], {
+				duration: 1,
+				ease: 'expo',
+				y: pos => pos ? 100 : -100,
+				opacity: 0
+			}, 0);
 	}
 	/**
-	 * Navigation
-	 * @param {String} direction 'prev' || 'next'
-	 */
+ * Navigation
+ * @param {String} direction 'prev' || 'next'
+ */
 	navigate(direction) {
-		
-		if ( this.isAnimating || (direction === 'next' && this.current === this.totalItems-1) || (direction === 'prev' && this.current === 0) ) return;
+		if (this.isAnimating || (direction === 'next' && this.current === this.totalItems - 1) || (direction === 'prev' && this.current === 0)) return;
 		this.isAnimating = true;
 
 		const previousCurrent = this.current;
 		const currentItem = this.DOM.items[previousCurrent];
-		this.current = direction === 'next' ? this.current+1 : this.current-1
+		this.current = direction === 'next' ? this.current + 1 : this.current - 1
 		const upcomingItem = this.DOM.items[this.current];
-		
+
 		currentItem.classList.remove('stack__item--current');
 		upcomingItem.classList.add('stack__item--current');
 
 		// show/hide arrows
-		gsap.set(this.DOM.navArrows.prev, {opacity: this.current > 0 ? 1 : 0});
-		gsap.set(this.DOM.navArrows.next, {opacity: this.current < this.totalItems-1 ? 1 : 0});
-		
+		gsap.set(this.DOM.navArrows.prev, { opacity: this.current > 0 ? 1 : 0 });
+		gsap.set(this.DOM.navArrows.next, { opacity: this.current < this.totalItems - 1 ? 1 : 0 });
+
 		gsap.timeline()
-		.to(this.DOM.el, {
-			duration: 1,
-			ease: 'expo',
-			y: direction === 'next' ? `-=${winsize.height/2 + winsize.height*.02}` : `+=${winsize.height/2 + winsize.height*.02}`,
-			onComplete: () => {
-				this.isAnimating = false;
-			}
-		})
-		.to(this.contentItems[previousCurrent].DOM.texts, {
-			duration: .2,
-			ease: 'power1',
-			yPercent: direction === 'next' ? 101 : -101,
-			onComplete: () => this.contentItems[previousCurrent].DOM.el.classList.remove('content__item--current')
-		}, 0)
-		.to(this.contentItems[this.current].DOM.texts, {
-			duration: .9,
-			ease: 'expo',
-			startAt: {yPercent: direction === 'next' ? -101 : 101},
-			onStart: () => this.contentItems[this.current].DOM.el.classList.add('content__item--current'),
-			yPercent: 0
-		}, .2)
+			.to(this.DOM.el, {
+				duration: 1,
+				ease: 'expo',
+				y: direction === 'next' ? `-=${winsize.height * 0.7 + winsize.height * 0.02}` : `+=${winsize.height * 0.7 + winsize.height * 0.02}`,
+				onComplete: () => {
+					this.isAnimating = false;
+				}
+			})
+			.to(this.contentItems[previousCurrent].DOM.texts, {
+				duration: .2,
+				ease: 'power1',
+				yPercent: direction === 'next' ? 101 : -101,
+				onComplete: () => this.contentItems[previousCurrent].DOM.el.classList.remove('content__item--current')
+			}, 0)
+			.to(this.contentItems[this.current].DOM.texts, {
+				duration: .9,
+				ease: 'expo',
+				startAt: { yPercent: direction === 'next' ? -101 : 101 },
+				onStart: () => this.contentItems[this.current].DOM.el.classList.add('content__item--current'),
+				yPercent: 0
+			}, .2)
 	}
+
 }

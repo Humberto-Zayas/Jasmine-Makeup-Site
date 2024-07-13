@@ -201,7 +201,8 @@ a:focus-visible {
 	width: 100%;
 	height: var(--stack-item-height);
 	background-size: cover;
-	background-position: center;
+	/* background-position: center; */
+	background-position: 100% 48%;
 	cursor: pointer;
 	will-change: width, height, transform, opacity;
 	transition: opacity 0.3s;
