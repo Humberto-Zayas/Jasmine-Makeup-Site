@@ -66,7 +66,7 @@ body {
 @keyframes loaderAnim {
 	to {
 		opacity: 1;
-		transform: scale3d(0.5,0.5,1);
+		transform: scale3d(0.5, 0.5, 1);
 	}
 }
 
@@ -184,7 +184,7 @@ a:focus-visible {
 .stack-wrap {
 	width: 100%;
 	position: absolute;
-    top: 0;
+	top: 0;
 }
 
 .stack {
@@ -259,7 +259,7 @@ a:focus-visible {
 	display: block;
 	margin-top: -1.5vw;
 	line-height: 1;
-	font-size: clamp(1rem,2.5vw,2.5rem);
+	font-size: clamp(1rem, 2.5vw, 2.5rem);
 	margin-left: 0.25vw;
 	font-weight: 200;
 }
@@ -305,18 +305,18 @@ a:focus-visible {
 	font-family: wayfinder-cf, serif;
 	font-weight: 100;
 	line-height: 1;
-	font-size: clamp(2rem,9vw,10rem);
+	font-size: clamp(2rem, 9vw, 10rem);
 	margin: 0 0 2rem 0;
 	color: #c87e4f;
 }
 
-.content__item-title > span {
+.content__item-title>span {
 	display: block;
 	white-space: nowrap;
 	line-height: 1;
 }
 
-.content__item-title > span:not(:first-child) {
+.content__item-title>span:not(:first-child) {
 	margin-top: -1vw;
 }
 
@@ -339,6 +339,8 @@ a:focus-visible {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	height: 82%;
+	margin-top: 6em;
 }
 
 .content__nav {
@@ -354,10 +356,10 @@ a:focus-visible {
 .content__nav svg {
 	stroke: #fff;
 	stroke-width: 3px;
-    width: auto;
-    height: 100%;
-    opacity: 0.5;
-    transition: opacity 0.3s;
+	width: auto;
+	height: 100%;
+	opacity: 0.5;
+	transition: opacity 0.3s;
 }
 
 .content__nav:hover svg,
@@ -379,6 +381,7 @@ a:focus-visible {
 	:root {
 		--stack-margin: 50vh;
 	}
+
 	.frame {
 		text-align: left;
 		top: 0;
@@ -394,60 +397,73 @@ a:focus-visible {
 		grid-template-columns: auto auto 1fr;
 		grid-template-rows: auto auto auto;
 		grid-template-areas: 'logo ... sponsor'
-							'... ...  ...'
-							'title title ...';
+			'... ...  ...'
+			'title title ...';
 	}
+
 	.frame__title {
 		grid-area: title;
 		justify-content: flex-start;
 		color: var(--color-text-alt);
 	}
+
 	.frame__logo {
 		grid-area: logo;
 	}
+
 	.frame a {
 		pointer-events: auto;
 	}
+
 	.content {
 		grid-template-areas: 'back slides'
-							'title slides'	
-							'... slides';
+			'title slides'
+			'... slides';
 		grid-template-columns: 1fr 50vw;
 		grid-template-rows: auto 1fr 10vh;
 		grid-column-gap: var(--page-padding);
 		padding: var(--page-padding) var(--slide-gap) var(--page-padding) var(--page-padding);
 	}
+
 	.content__item {
 		grid-area: title;
 		align-self: end;
 		text-align: left;
 	}
+
 	.content__item-title {
 		display: inline-flex;
 		flex-direction: column;
 	}
-	.content__item-title > span:first-child {
+
+	.content__item-title>span:first-child {
 		padding-right: 2rem;
 	}
-	.content__item-title > span:last-child {
+
+	.content__item-title>span:last-child {
 		margin-left: auto;
 	}
+
 	.content__item-description {
 		max-width: 300px;
 	}
+
 	.content__back {
 		grid-area: back;
 		justify-self: end;
 	}
+
 	.content__nav-wrap {
-		grid-area: slides; 
+		grid-area: slides;
 	}
+
 	.slides {
 		background: transparent;
 		width: 50vw;
 		margin-left: auto;
 		margin-right: var(--slide-gap);
 	}
+
 	.slides .stack__item--current {
 		opacity: 1;
 	}
