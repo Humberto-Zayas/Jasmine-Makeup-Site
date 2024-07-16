@@ -150,7 +150,7 @@ a:focus-visible {
 }
 
 .frame__logo {
-  line-height: .9;
+  line-height: 1.3;
 }
 
 .frame__logo-title {
@@ -162,6 +162,7 @@ a:focus-visible {
 }
 
 .frame__logo-subtitle {
+  margin-top: .5rem;
   margin-left: .75rem;
 }
 
@@ -181,7 +182,7 @@ a:focus-visible {
 }
 
 .stack__item {
-  opacity: .2;
+  opacity: .35;
   height: var(--stack-item-height);
   cursor: pointer;
   will-change: width, height, transform, opacity;
@@ -192,7 +193,7 @@ a:focus-visible {
 }
 
 .stack__item:hover {
-  opacity: .5;
+  opacity: .85;
 }
 
 .stack__item--empty {

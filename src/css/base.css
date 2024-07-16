@@ -166,7 +166,8 @@ a:focus-visible {
 }
 
 .frame__logo {
-	line-height: 0.9;
+	/* line-height: 0.9; */
+	line-height: 1.3;
 }
 
 .frame__logo-title {
@@ -179,6 +180,7 @@ a:focus-visible {
 
 .frame__logo-subtitle {
 	margin-left: 0.75rem;
+	margin-top: 0.5rem;
 }
 
 .stack-wrap {
