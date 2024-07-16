@@ -1035,7 +1035,7 @@ class Slideshow {
     };
     // Content instances
     contentItems = [];
-    // Check is Slishow is in open mode or closed mode
+    // Check is Slideshow is in open mode or closed mode
     isOpen = false;
     // Current item's position
     current = -1;
@@ -1043,10 +1043,12 @@ class Slideshow {
     totalItems = 0;
     // items gap (CSS variable)
     gap = getComputedStyle(document.documentElement).getPropertyValue("--slide-gap");
+    // Map to associate slides with content items
+    slideToContentMap = [];
     /**
-	 * Constructor.
-	 * @param {NodeList} DOM_el - main element (.stack)
-	 */ constructor(DOM_el){
+     * Constructor.
+     * @param {NodeList} DOM_el - main element (.stack)
+     */ constructor(DOM_el){
         this.DOM.el = DOM_el;
         this.DOM.items = [
             ...this.DOM.el.querySelectorAll(".stack__item:not(.stack__item--empty)")
@@ -1054,10 +1056,16 @@ class Slideshow {
         this.totalItems = this.DOM.items.length;
         this.DOM.contentItems.forEach((item)=>this.contentItems.push(new (0, _contentItem.ContentItem)(item)));
         this.initEvents();
+        this.createSlideToContentMap();
     }
     /**
-	 * Event binding.
-	 */ initEvents() {
+     * Create the slide to content mapping
+     */ createSlideToContentMap() {
+        for(let i = 0; i < this.totalItems; i++)this.slideToContentMap[i] = Math.floor(i / 2);
+    }
+    /**
+     * Event binding.
+     */ initEvents() {
         this.DOM.items.forEach((item, position)=>{
             // Clicking on a stack item reveals the slideshow navigation and the item's content
             item.addEventListener("click", ()=>{
@@ -1092,32 +1100,32 @@ class Slideshow {
         this.scrollObserver.disable();
     }
     /**
-	 * Opens the slideshow navigation and reveals the item's content.
-	 * @param {NodeList} stackItem - the clicked item
-	 */ open(stackItem) {
+     * Opens the slideshow navigation and reveals the item's content.
+     * @param {NodeList} stackItem - the clicked item
+     */ open(stackItem) {
         if (this.isAnimating || this.isOpen) return;
         this.isAnimating = true;
         // Update the current value
         this.current = this.DOM.items.indexOf(stackItem);
-        // enable the observer (closes teh slideshow on scroll/touch)
+        // Enable the observer (closes the slideshow on scroll/touch)
         this.scrollObserver.enable();
         const scrollY = window.scrollY;
         body.classList.add("oh");
         this.DOM.content.classList.add("content--open");
-        // set CSS current classes to both content and stack item elements
-        this.contentItems[this.current].DOM.el.classList.add("content__item--current");
+        // Set CSS current classes to both content and stack item elements
+        this.contentItems[this.slideToContentMap[this.current]].DOM.el.classList.add("content__item--current");
         this.DOM.items[this.current].classList.add("stack__item--current");
         const state = (0, _flip.Flip).getState(this.DOM.items, {
             props: "opacity"
         });
         this.DOM.slides.appendChild(this.DOM.el);
         const itemCenter = stackItem.offsetTop + stackItem.offsetHeight / 2;
-        // seems to solve a bug in firefox
+        // Seems to solve a bug in firefox
         document.documentElement.scrollTop = document.body.scrollTop = 0;
         (0, _gsap.gsap).set(this.DOM.el, {
             y: winsize.height / 2 - itemCenter + scrollY
         });
-        // seems to solve a bug in firefox
+        // Seems to solve a bug in firefox
         document.documentElement.scrollTop = document.body.scrollTop = 0;
         // Flip
         (0, _flip.Flip).from(state, {
@@ -1127,14 +1135,14 @@ class Slideshow {
                 this.isOpen = true;
                 this.isAnimating = false;
             },
-            // seems to solve a bug in firefox
+            // Seems to solve a bug in firefox
             onStart: ()=>document.documentElement.scrollTop = document.body.scrollTop = scrollY,
             absoluteOnLeave: true
         }).to(this.DOM.mainTitleTexts, {
             duration: .9,
             ease: "expo",
             yPercent: -101
-        }, 0).to(this.contentItems[this.current].DOM.texts, {
+        }, 0).to(this.contentItems[this.slideToContentMap[this.current]].DOM.texts, {
             duration: 1,
             ease: "expo",
             startAt: {
@@ -1163,8 +1171,8 @@ class Slideshow {
         }, 0);
     }
     /**
-	 * Closes the slideshow navigation and hides the content
-	 */ close() {
+     * Closes the slideshow navigation and hides the content
+     */ close() {
         if (this.isAnimating || !this.isOpen) return;
         this.isAnimating = true;
         this.scrollObserver.disable();
@@ -1183,7 +1191,7 @@ class Slideshow {
             ease: "expo",
             onComplete: ()=>{
                 this.DOM.content.classList.remove("content--open");
-                this.contentItems[this.current].DOM.el.classList.remove("content__item--current");
+                this.contentItems[this.slideToContentMap[this.current]].DOM.el.classList.remove("content__item--current");
                 this.current = -1;
                 this.isOpen = false;
                 this.isAnimating = false;
@@ -1196,7 +1204,7 @@ class Slideshow {
                 yPercent: 101
             },
             yPercent: 0
-        }, 0).to(this.contentItems[this.current].DOM.texts, {
+        }, 0).to(this.contentItems[this.slideToContentMap[this.current]].DOM.texts, {
             duration: 1,
             ease: "expo",
             yPercent: -101
@@ -1215,9 +1223,9 @@ class Slideshow {
         }, 0);
     }
     /**
- * Navigation
- * @param {String} direction 'prev' || 'next'
- */ navigate(direction) {
+     * Navigation
+     * @param {String} direction 'prev' || 'next'
+     */ navigate(direction) {
         if (this.isAnimating || direction === "next" && this.current === this.totalItems - 1 || direction === "prev" && this.current === 0) return;
         this.isAnimating = true;
         const previousCurrent = this.current;
@@ -1226,34 +1234,40 @@ class Slideshow {
         const upcomingItem = this.DOM.items[this.current];
         currentItem.classList.remove("stack__item--current");
         upcomingItem.classList.add("stack__item--current");
-        // show/hide arrows
+        // Show/hide arrows
         (0, _gsap.gsap).set(this.DOM.navArrows.prev, {
             opacity: this.current > 0 ? 1 : 0
         });
         (0, _gsap.gsap).set(this.DOM.navArrows.next, {
             opacity: this.current < this.totalItems - 1 ? 1 : 0
         });
-        (0, _gsap.gsap).timeline().to(this.DOM.el, {
-            duration: 1,
-            ease: "expo",
-            y: direction === "next" ? `-=${winsize.height * 0.7 + winsize.height * 0.02}` : `+=${winsize.height * 0.7 + winsize.height * 0.02}`,
+        const currentContentIndex = this.slideToContentMap[this.current];
+        const previousContentIndex = this.slideToContentMap[previousCurrent];
+        const timeline = (0, _gsap.gsap).timeline({
             onComplete: ()=>{
                 this.isAnimating = false;
             }
-        }).to(this.contentItems[previousCurrent].DOM.texts, {
-            duration: .2,
+        });
+        // Only update the content item if the new slide corresponds to a different content item
+        if (currentContentIndex !== previousContentIndex) timeline.to(this.contentItems[previousContentIndex].DOM.texts, {
+            duration: 0.2,
             ease: "power1",
             yPercent: direction === "next" ? 101 : -101,
-            onComplete: ()=>this.contentItems[previousCurrent].DOM.el.classList.remove("content__item--current")
-        }, 0).to(this.contentItems[this.current].DOM.texts, {
-            duration: .9,
+            onComplete: ()=>this.contentItems[previousContentIndex].DOM.el.classList.remove("content__item--current")
+        }, 0).to(this.contentItems[currentContentIndex].DOM.texts, {
+            duration: 0.9,
             ease: "expo",
             startAt: {
                 yPercent: direction === "next" ? -101 : 101
             },
-            onStart: ()=>this.contentItems[this.current].DOM.el.classList.add("content__item--current"),
+            onStart: ()=>this.contentItems[currentContentIndex].DOM.el.classList.add("content__item--current"),
             yPercent: 0
-        }, .2);
+        }, 0.2);
+        timeline.to(this.DOM.el, {
+            duration: 1,
+            ease: "expo",
+            y: direction === "next" ? `-=${winsize.height * 0.7 + winsize.height * 0.02}` : `+=${winsize.height * 0.7 + winsize.height * 0.02}`
+        }, 0);
     }
 }
 

@@ -182,7 +182,7 @@ a:focus-visible {
 }
 
 .stack__item {
-  opacity: .35;
+  opacity: .2;
   height: var(--stack-item-height);
   cursor: pointer;
   will-change: width, height, transform, opacity;
@@ -193,7 +193,7 @@ a:focus-visible {
 }
 
 .stack__item:hover {
-  opacity: .85;
+  opacity: .5;
 }
 
 .stack__item--empty {
