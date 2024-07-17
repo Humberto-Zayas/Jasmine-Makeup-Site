@@ -16,10 +16,10 @@
 	--page-padding: 2rem;
 
 	/* Stack and slideshow */
-	--stack-margin: 10rem;
+	--stack-margin: 20rem;
 	--slide-gap: 2vh;
-	--stack-width: 38vw;
-	--stack-item-height: 8vh;
+	--stack-width: 50vw;
+	--stack-item-height: 10vh;
 	--slide-width: 40vw;
 	--slide-height: 70vh;
 }
@@ -174,13 +174,21 @@ a:focus-visible {
 	font-family: wayfinder-cf, serif;
 	font-weight: 100;
 	font-style: normal;
-	font-size: 2.75rem;
+	font-size: 3.75rem;
 	margin: 0;
 }
 
 .frame__logo-subtitle {
-	margin-left: 0.75rem;
+	/* margin-left: 0.75rem; */
 	margin-top: 0.5rem;
+}
+
+.frame__description {
+	display: block;
+}
+
+.desktop_intro {
+	display: none;
 }
 
 .stack-wrap {
@@ -283,6 +291,7 @@ a:focus-visible {
 }
 
 .content__item {
+	display: none;
 	grid-area: slides;
 	overflow: hidden;
 	position: absolute;
@@ -292,12 +301,13 @@ a:focus-visible {
 }
 
 .content__item--current {
+	display: none;
 	overflow: visible;
 	position: relative;
 	pointer-events: auto;
 	height: auto;
 	opacity: 1;
-	display: flex;
+	/* display: flex; */
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
@@ -381,7 +391,7 @@ a:focus-visible {
 
 @media screen and (min-width: 53em) {
 	:root {
-		--stack-margin: 50vh;
+		--stack-margin: 25vh;
 	}
 
 	.frame {
@@ -417,6 +427,14 @@ a:focus-visible {
 		pointer-events: auto;
 	}
 
+	.frame__description {
+		display: none;
+	}
+
+	.desktop_intro {
+		display: block;
+	}
+
 	.content {
 		grid-template-areas: 'back slides'
 			'title slides'
@@ -428,6 +446,7 @@ a:focus-visible {
 	}
 
 	.content__item {
+		display: block;
 		grid-area: title;
 		align-self: end;
 		text-align: left;

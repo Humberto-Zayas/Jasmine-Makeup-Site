@@ -9,10 +9,10 @@
   --color-link: #fff;
   --color-link-hover: #ccc;
   --page-padding: 2rem;
-  --stack-margin: 10rem;
+  --stack-margin: 20rem;
   --slide-gap: 2vh;
-  --stack-width: 38vw;
-  --stack-item-height: 8vh;
+  --stack-width: 50vw;
+  --stack-item-height: 10vh;
   --slide-width: 40vw;
   --slide-height: 70vh;
   margin: 0;
@@ -156,14 +156,21 @@ a:focus-visible {
 .frame__logo-title {
   margin: 0;
   font-family: wayfinder-cf, serif;
-  font-size: 2.75rem;
+  font-size: 3.75rem;
   font-style: normal;
   font-weight: 100;
 }
 
 .frame__logo-subtitle {
   margin-top: .5rem;
-  margin-left: .75rem;
+}
+
+.frame__description {
+  display: block;
+}
+
+.desktop_intro {
+  display: none;
 }
 
 .stack-wrap {
@@ -271,6 +278,7 @@ a:focus-visible {
   pointer-events: none;
   grid-area: slides;
   height: 0;
+  display: none;
   position: absolute;
   overflow: hidden;
 }
@@ -282,7 +290,7 @@ a:focus-visible {
   justify-content: center;
   align-items: flex-start;
   height: auto;
-  display: flex;
+  display: none;
   position: relative;
   overflow: visible;
 }
@@ -363,7 +371,7 @@ a:focus-visible {
 
 @media screen and (width >= 53em) {
   :root {
-    --stack-margin: 50vh;
+    --stack-margin: 25vh;
   }
 
   .frame {
@@ -398,6 +406,14 @@ a:focus-visible {
     pointer-events: auto;
   }
 
+  .frame__description {
+    display: none;
+  }
+
+  .desktop_intro {
+    display: block;
+  }
+
   .content {
     grid-column-gap: var(--page-padding);
     padding: var(--page-padding) var(--slide-gap) var(--page-padding) var(--page-padding);
@@ -411,6 +427,7 @@ a:focus-visible {
     text-align: left;
     grid-area: title;
     align-self: end;
+    display: block;
   }
 
   .content__item-title {

@@ -1061,7 +1061,20 @@ class Slideshow {
     /**
      * Create the slide to content mapping
      */ createSlideToContentMap() {
-        for(let i = 0; i < this.totalItems; i++)this.slideToContentMap[i] = Math.floor(i / 2);
+        // Define your custom mapping here
+        const mapping = [
+            0,
+            1,
+            1,
+            2,
+            2,
+            2,
+            3,
+            4,
+            5,
+            6
+        ];
+        for(let i = 0; i < this.totalItems; i++)this.slideToContentMap[i] = mapping[i];
     }
     /**
      * Event binding.
