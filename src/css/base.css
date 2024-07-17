@@ -19,7 +19,7 @@
 	--stack-margin: 20rem;
 	--slide-gap: 2vh;
 	--stack-width: 50vw;
-	--stack-item-height: 10vh;
+	--stack-item-height: 20vh;
 	--slide-width: 40vw;
 	--slide-height: 70vh;
 }
@@ -207,7 +207,7 @@ a:focus-visible {
 }
 
 .stack__item {
-	opacity: 0.2;
+	opacity: 0.5;
 	width: 100%;
 	height: var(--stack-item-height);
 	background-size: cover;
@@ -219,7 +219,7 @@ a:focus-visible {
 }
 
 .stack__item:hover {
-	opacity: 0.5;
+	opacity: 0.8;
 }
 
 .stack__item--empty {
@@ -246,7 +246,7 @@ a:focus-visible {
 }
 
 .slides .stack__item--current {
-	opacity: 0.6;
+	opacity: 1;
 }
 
 .title {

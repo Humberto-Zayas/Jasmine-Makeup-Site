@@ -1064,15 +1064,16 @@ class Slideshow {
         // Define your custom mapping here
         const mapping = [
             0,
+            0,
             1,
             1,
-            2,
             2,
             2,
             3,
+            3,
             4,
-            5,
-            6
+            4,
+            5
         ];
         for(let i = 0; i < this.totalItems; i++)this.slideToContentMap[i] = mapping[i];
     }

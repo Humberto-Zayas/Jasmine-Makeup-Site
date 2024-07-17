@@ -12,7 +12,7 @@
   --stack-margin: 20rem;
   --slide-gap: 2vh;
   --stack-width: 50vw;
-  --stack-item-height: 10vh;
+  --stack-item-height: 20vh;
   --slide-width: 40vw;
   --slide-height: 70vh;
   margin: 0;
@@ -189,7 +189,7 @@ a:focus-visible {
 }
 
 .stack__item {
-  opacity: .2;
+  opacity: .5;
   height: var(--stack-item-height);
   cursor: pointer;
   will-change: width, height, transform, opacity;
@@ -200,7 +200,7 @@ a:focus-visible {
 }
 
 .stack__item:hover {
-  opacity: .5;
+  opacity: .8;
 }
 
 .stack__item--empty {
@@ -227,7 +227,7 @@ a:focus-visible {
 }
 
 .slides .stack__item--current {
-  opacity: .6;
+  opacity: 1;
 }
 
 .title {

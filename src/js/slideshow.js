@@ -82,15 +82,16 @@ export class Slideshow {
         // Define your custom mapping here
         const mapping = [
             0, // Slide 1 corresponds to Content Item 0
-            1, // Slide 2 corresponds to Content Item 1
+            0, // Slide 2 corresponds to Content Item 1
             1, // Slide 3 corresponds to Content Item 1
-            2, // Slide 4 corresponds to Content Item 2
+            1, // Slide 4 corresponds to Content Item 2
             2, // Slide 5 corresponds to Content Item 2
             2, // Slide 6 corresponds to Content Item 2
             3,  // Slide 7 corresponds to Content Item 3
+						3,
 						4,
-						5,
-						6
+						4,
+						5
         ];
 
         for (let i = 0; i < this.totalItems; i++) {
