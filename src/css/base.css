@@ -1,3 +1,10 @@
+@font-face {
+	font-family: 'Lovan';
+	src: url('../fonts/Lovan.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
 *,
 *::after,
 *::before {
@@ -18,8 +25,8 @@
 	/* Stack and slideshow */
 	--stack-margin: 20rem;
 	--slide-gap: 2vh;
-	--stack-width: 50vw;
-	--stack-item-height: 20vh;
+	--stack-width: 40vw;
+	--stack-item-height: 30vh;
 	--slide-width: 40vw;
 	--slide-height: 70vh;
 }
@@ -113,6 +120,13 @@ a:focus-visible {
 	will-change: transform;
 }
 
+.button {
+	padding: 1rem;
+	background-color: #c87e4f;
+	width: fit-content;
+	border-radius: 20px;
+}
+
 .unbutton {
 	background: none;
 	border: 0;
@@ -139,6 +153,7 @@ a:focus-visible {
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
+	
 }
 
 .frame__title-main {
@@ -171,16 +186,20 @@ a:focus-visible {
 }
 
 .frame__logo-title {
-	font-family: wayfinder-cf, serif;
+	/* font-family: wayfinder-cf, serif; */
+	font-family: 'Lovan', sans-serif;
 	font-weight: 100;
 	font-style: normal;
-	font-size: 3.75rem;
+	font-size: 5rem;
 	margin: 0;
+	/* margin-bottom: -0.1em; */
+	color: #FFFFFF;
+	text-shadow: 0px 0px 6px rgba(200, 26, 26, 0.7);
 }
 
 .frame__logo-subtitle {
-	/* margin-left: 0.75rem; */
-	margin-top: 0.5rem;
+	margin-left: 1rem;
+	/* margin-top: 0.5rem; */
 }
 
 .frame__description {
@@ -199,6 +218,7 @@ a:focus-visible {
 
 .stack {
 	margin: 0 auto;
+	/* margin-left: 2em; */
 	width: var(--stack-width);
 	min-width: 300px;
 	grid-gap: 2vh;
@@ -255,23 +275,29 @@ a:focus-visible {
 	left: 50vw;
 	margin-bottom: 15vh;
 	pointer-events: none;
+	padding: 20px;
 }
 
 .title__main {
-	font-size: 11vw;
+	font-size: 9vw;
 	margin: 0;
-	font-family: wayfinder-cf, serif;
+	/* font-family: wayfinder-cf, serif; */
+	font-family: 'Lovan', sans-serif;
 	font-weight: 100;
 	line-height: 1;
 }
 
 .title__sub {
 	display: block;
-	margin-top: -1.5vw;
 	line-height: 1;
 	font-size: clamp(1rem, 2.5vw, 2.5rem);
 	margin-left: 0.25vw;
 	font-weight: 200;
+}
+
+.title__font {
+	font-weight: 100;
+	font-size: 30px;
 }
 
 .content {
@@ -413,11 +439,19 @@ a:focus-visible {
 			'title title ...';
 	}
 
+	.stack {
+			margin-left: 2em;
+	}
+
 	.frame__title {
 		grid-area: title;
 		justify-content: flex-start;
 		color: var(--color-text-alt);
+		position: fixed;
+		bottom: 2em;
+		right: 2em;
 	}
+	
 
 	.frame__logo {
 		grid-area: logo;
@@ -433,6 +467,8 @@ a:focus-visible {
 
 	.desktop_intro {
 		display: block;
+		font-size: 1.2em;
+
 	}
 
 	.content {

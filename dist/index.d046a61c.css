@@ -1,3 +1,10 @@
+@font-face {
+  font-family: Lovan;
+  src: url("Lovan.11a664e7.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 *, :after, :before {
   box-sizing: border-box;
 }
@@ -11,8 +18,8 @@
   --page-padding: 2rem;
   --stack-margin: 20rem;
   --slide-gap: 2vh;
-  --stack-width: 50vw;
-  --stack-item-height: 20vh;
+  --stack-width: 40vw;
+  --stack-item-height: 30vh;
   --slide-width: 40vw;
   --slide-height: 70vh;
   margin: 0;
@@ -98,6 +105,13 @@ a:focus-visible {
   display: inline-block;
 }
 
+.button {
+  background-color: #c87e4f;
+  border-radius: 20px;
+  width: fit-content;
+  padding: 1rem;
+}
+
 .unbutton {
   color: inherit;
   font: inherit;
@@ -154,15 +168,17 @@ a:focus-visible {
 }
 
 .frame__logo-title {
+  color: #fff;
+  text-shadow: 0 0 6px #c81a1ab3;
   margin: 0;
-  font-family: wayfinder-cf, serif;
-  font-size: 3.75rem;
+  font-family: Lovan, sans-serif;
+  font-size: 5rem;
   font-style: normal;
   font-weight: 100;
 }
 
 .frame__logo-subtitle {
-  margin-top: .5rem;
+  margin-left: 1rem;
 }
 
 .frame__description {
@@ -233,6 +249,7 @@ a:focus-visible {
 .title {
   pointer-events: none;
   margin-bottom: 15vh;
+  padding: 20px;
   position: fixed;
   bottom: 0;
   left: 50vw;
@@ -240,19 +257,23 @@ a:focus-visible {
 
 .title__main {
   margin: 0;
-  font-family: wayfinder-cf, serif;
-  font-size: 11vw;
+  font-family: Lovan, sans-serif;
+  font-size: 9vw;
   font-weight: 100;
   line-height: 1;
 }
 
 .title__sub {
-  margin-top: -1.5vw;
   margin-left: .25vw;
   font-size: clamp(1rem, 2.5vw, 2.5rem);
   font-weight: 200;
   line-height: 1;
   display: block;
+}
+
+.title__font {
+  font-size: 30px;
+  font-weight: 100;
 }
 
 .content {
@@ -392,10 +413,17 @@ a:focus-visible {
     left: 0;
   }
 
+  .stack {
+    margin-left: 2em;
+  }
+
   .frame__title {
     color: var(--color-text-alt);
     grid-area: title;
     justify-content: flex-start;
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
   }
 
   .frame__logo {
@@ -411,6 +439,7 @@ a:focus-visible {
   }
 
   .desktop_intro {
+    font-size: 1.2em;
     display: block;
   }
 
