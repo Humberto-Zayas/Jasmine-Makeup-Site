@@ -204,6 +204,15 @@ a:focus-visible {
 
 .frame__description {
 	display: block;
+	margin-bottom: 20px;
+}
+
+.mobile_intro {
+	display: block;
+}
+
+.hide {
+	display: none;
 }
 
 .desktop_intro {
@@ -465,10 +474,17 @@ a:focus-visible {
 		display: none;
 	}
 
+	.mobile_intro {
+		display: none;
+	}
+
+	.hide {
+		display: block;
+	}
+
 	.desktop_intro {
 		display: block;
 		font-size: 1.2em;
-
 	}
 
 	.content {

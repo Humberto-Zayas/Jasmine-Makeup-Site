@@ -182,10 +182,15 @@ a:focus-visible {
 }
 
 .frame__description {
+  margin-bottom: 20px;
   display: block;
 }
 
-.desktop_intro {
+.mobile_intro {
+  display: block;
+}
+
+.hide, .desktop_intro {
   display: none;
 }
 
@@ -434,8 +439,12 @@ a:focus-visible {
     pointer-events: auto;
   }
 
-  .frame__description {
+  .frame__description, .mobile_intro {
     display: none;
+  }
+
+  .hide {
+    display: block;
   }
 
   .desktop_intro {
