@@ -86,12 +86,13 @@ export class Slideshow {
             1, // Slide 3 corresponds to Content Item 1
             1, // Slide 4 corresponds to Content Item 2
             2, // Slide 5 corresponds to Content Item 2
-            2, // Slide 6 corresponds to Content Item 2
-            3,  // Slide 7 corresponds to Content Item 3
-						3,
-						4,
-						4,
-						5
+            3, // Slide 6 corresponds to Content Item 2
+            3, // Slide 7 corresponds to Content Item 3
+			4,
+			4,
+			5,
+			5,
+            6
         ];
 
         for (let i = 0; i < this.totalItems; i++) {

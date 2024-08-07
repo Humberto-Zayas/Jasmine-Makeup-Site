@@ -1068,12 +1068,13 @@ class Slideshow {
             1,
             1,
             2,
-            2,
             3,
             3,
             4,
             4,
-            5
+            5,
+            5,
+            6
         ];
         for(let i = 0; i < this.totalItems; i++)this.slideToContentMap[i] = mapping[i];
     }
