@@ -1035,7 +1035,7 @@ class Slideshow {
     };
     // Content instances
     contentItems = [];
-    // Check is Slideshow is in open mode or closed mode
+    // Check if Slideshow is in open mode or closed mode
     isOpen = false;
     // Current item's position
     current = -1;
@@ -1097,22 +1097,34 @@ class Slideshow {
         this.DOM.navArrows.prev.addEventListener("click", ()=>{
             this.navigate("prev");
         });
-        // Trigger the close() on scroll by using the gsap observer plugin
-        const scrollFn = ()=>{
-            if (this.isOpen && !this.isAnimating) {
-                this.close();
-                this.scrollObserver.disable();
-            }
-        };
-        this.scrollObserver = (0, _observer.Observer).create({
-            type: "wheel,touch,pointer",
-            wheelSpeed: -1,
-            onDown: scrollFn,
-            onUp: scrollFn,
-            tolerance: 10,
-            preventDefault: true
+        // Add touch event listeners for swiping
+        this.addTouchEventListeners();
+    }
+    /**
+     * Add touch event listeners for swipe functionality.
+     */ addTouchEventListeners() {
+        let touchStartY = 0;
+        let touchEndY = 0;
+        // Handle touch start event
+        this.DOM.el.addEventListener("touchstart", (event)=>{
+            touchStartY = event.touches[0].clientY; // Get the Y position of the touch
         });
-        this.scrollObserver.disable();
+        // Handle touch end event
+        this.DOM.el.addEventListener("touchend", (event)=>{
+            touchEndY = event.changedTouches[0].clientY; // Get the Y position of the released touch
+            this.handleSwipe(touchStartY, touchEndY);
+        });
+    }
+    /**
+     * Handle swipe direction based on touch positions.
+     * @param {number} startY - The starting Y position of the touch.
+     * @param {number} endY - The ending Y position of the touch.
+     */ handleSwipe(startY, endY) {
+        const swipeThreshold = 30; // Minimum distance to consider a swipe
+        if (startY - endY > swipeThreshold) // Swipe up
+        this.navigate("next");
+        else if (endY - startY > swipeThreshold) // Swipe down
+        this.navigate("prev");
     }
     /**
      * Opens the slideshow navigation and reveals the item's content.
@@ -1122,8 +1134,6 @@ class Slideshow {
         this.isAnimating = true;
         // Update the current value
         this.current = this.DOM.items.indexOf(stackItem);
-        // Enable the observer (closes the slideshow on scroll/touch)
-        this.scrollObserver.enable();
         const scrollY = window.scrollY;
         body.classList.add("oh");
         this.DOM.content.classList.add("content--open");
@@ -1190,7 +1200,6 @@ class Slideshow {
      */ close() {
         if (this.isAnimating || !this.isOpen) return;
         this.isAnimating = true;
-        this.scrollObserver.disable();
         this.DOM.items[this.current].classList.remove("stack__item--current");
         body.classList.remove("oh");
         const state = (0, _flip.Flip).getState(this.DOM.items, {
